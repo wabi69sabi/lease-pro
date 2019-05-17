@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Basic Rails Application to showcase skills
 
-Things you may want to cover:
+* Ruby version 2.6
 
-* Ruby version
+* Just bundle it
 
-* System dependencies
+* Simple rails db:setup should get the database started
 
-* Configuration
+* Database initialization with rails db:create
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* rspec runs the tests
