@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
 
   it "should not be valid without a first_name" do
     @user.first_name = nil
-    @user.should_not be_valid
+    expect(@user).to_not be_valid
   end
 
   it "should allow to assign a role" do
