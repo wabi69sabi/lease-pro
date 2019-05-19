@@ -4,12 +4,15 @@ class LeasesController < ApplicationController
   # GET /leases
   # GET /leases.json
   def index
+    # needs a filter to only show leases to be accessed by current_user
+    # something like Lease.where(users.include? current_user)
     @leases = Lease.all
   end
 
   # GET /leases/1
   # GET /leases/1.json
   def show
+    authorize! :read, @lease
   end
 
   # GET /leases/new
@@ -26,6 +29,8 @@ class LeasesController < ApplicationController
   def create
     @lease = Lease.new(lease_params)
 
+    authorize! :create, @lease
+
     respond_to do |format|
       if @lease.save
         format.html { redirect_to @lease, notice: 'Lease was successfully created.' }
@@ -40,6 +45,8 @@ class LeasesController < ApplicationController
   # PATCH/PUT /leases/1
   # PATCH/PUT /leases/1.json
   def update
+    authorize! :update, @lease
+
     respond_to do |format|
       if @lease.update(lease_params)
         format.html { redirect_to @lease, notice: 'Lease was successfully updated.' }
@@ -54,6 +61,8 @@ class LeasesController < ApplicationController
   # DELETE /leases/1
   # DELETE /leases/1.json
   def destroy
+    authorize! :update, @lease
+
     @lease.destroy
     respond_to do |format|
       format.html { redirect_to leases_url, notice: 'Lease was successfully destroyed.' }
