@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :lease do
+    id { rand(4) }
     address { "MyString" }
     city { "MyString" }
     state { "MyString" }

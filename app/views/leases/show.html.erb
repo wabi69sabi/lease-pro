@@ -1,0 +1,30 @@
+<h1>Lease # <%= @lease.id %></h1>
+<ul>
+  <li> Address:
+    <%= @lease.address %>
+  </li>
+  <li> City:
+    <%= @lease.city %>
+  </li>
+  <li> State:
+    <%= @lease.state %>
+  </li>
+  <li> Country:
+    <%= @lease.country %>
+  </li>
+  <li> Rent:
+    <%= @lease.rent %>
+  </li>
+  <li> Start date:
+    <%= @lease.start_date %>
+  </li>
+  <li> End date:
+    <%= @lease.end_date %>
+  </li>
+  <li> Due date:
+    <%= @lease.due_date %>
+  </li>
+</ul>
+
+<%= link_to 'Edit', edit_lease_path(@lease) %> |
+<%= link_to 'Back', leases_path %>
