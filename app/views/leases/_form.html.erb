@@ -1,57 +1,76 @@
-<%= form_with(model: lease, local: true) do |f| %>
-  <% if lease.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(lease.errors.count, "error") %> prohibited this lease from being saved:</h2>
+<% if current_user.role == 'owner' || @lease.manager == current_user.id %>
+  <%= form_with(model: lease, local: true) do |f| %>
+    <% if lease.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(lease.errors.count, "error") %> prohibited this lease from being saved:</h2>
 
-      <ul>
-      <% lease.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+        <ul>
+        <% lease.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :address %><br />
+      <%= f.text_field :address %>
+    </div>
+
+    <div class="field">
+      <%= f.label :city %><br />
+      <%= f.text_field :city %>
+    </div>
+
+    <div class="field">
+      <%= f.label :state %><br />
+      <%= f.text_field :state %>
+    </div>
+
+    <div class="field">
+      <%= f.label :country %><br />
+      <%= f.text_field :country %>
+    </div>
+
+    <div class="field">
+      <%= f.label :rent %><br />
+      <%= f.text_field :rent %>
+    </div>
+
+    <div class="field">
+      <%= f.label :start_date %><br />
+      <%= f.date_select :start_date, as: :date %>
+    </div>
+
+    <div class="field">
+      <%= f.label :end_date %><br />
+      <%= f.date_select :end_date, as: :date %>
+    </div>
+
+    <div class="field">
+      <%= f.label :due_date %><br />
+      <%= f.text_field :due_date, as: :integer %>
+    </div>
+
+    <% if current_user.owner? %>
+      <%= f.hidden_field :owner, value: current_user.id, as: :integer %>
+    <% end%>
+
+    <div class="field">
+      <%= f.label :manager %><br />
+      <%= f.collection_select :manager, @managers.order(:email),:id,:email, include_blank: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :tenant %><br />
+      <%= f.collection_select :tenant, @tenants.order(:email),:id,:email, include_blank: true %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
-  </div>
-
-  <div class="field">
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
-  </div>
-
-  <div class="field">
-    <%= f.label :state %><br />
-    <%= f.text_field :state %>
-  </div>
-
-  <div class="field">
-    <%= f.label :country %><br />
-    <%= f.text_field :country %>
-  </div>
-
-  <div class="field">
-    <%= f.label :rent %><br />
-    <%= f.text_field :rent %>
-  </div>
-
-  <div class="field">
-    <%= f.label :start_date %><br />
-    <%= f.date_select :start_date, as: :date %>
-  </div>
-
-  <div class="field">
-    <%= f.label :end_date %><br />
-    <%= f.date_select :end_date, as: :date %>
-  </div>
-
-  <div class="field">
-    <%= f.label :due_date %><br />
-    <%= f.text_field :due_date, as: :integer %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<% else %>
+  <h3>You don't have permission to edit this lease</h3>
 <% end %>

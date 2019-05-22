@@ -24,11 +24,17 @@ class AccessPolicy
     end
 
     role :manager, proc { |user| user.manager? } do
-      can [:read, :update], Lease
+      can :read, Lease
+      can [:update], Lease do |lease, user|
+        lease.manager == user.id
+      end
     end
 
     role :tenant, proc { |user| user.tenant? } do
       can :read, Lease
+      can [:update], Lease do |lease, user|
+        lease.tenant == user.id
+      end
     end
 
   end
