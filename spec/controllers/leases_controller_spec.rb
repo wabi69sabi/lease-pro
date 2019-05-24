@@ -42,50 +42,50 @@ RSpec.describe LeasesController, type: :controller do
   # LeasesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #index" do
-    it "returns a success response" do
-      Lease.create! valid_attributes
-      get :index, params: {}, session: valid_session
-      expect(response).to be_successful
-    end
-  end
+  # describe "GET #index" do
+  #   it "returns a success response" do
+  #     Lease.create! valid_attributes
+  #     get :index, params: {}, session: valid_session
+  #     expect(response).to be_successful
+  #   end
+  # end
+  #
+  # describe "GET #show" do
+  #   it "returns a success response" do
+  #     lease = Lease.create! valid_attributes
+  #     get :show, params: {id: lease.to_param}, session: valid_session
+  #     expect(response).to be_successful
+  #   end
+  # end
+  #
+  # describe "GET #new" do
+  #   it "returns a success response" do
+  #     get :new, params: {}, session: valid_session
+  #     expect(response).to be_successful
+  #   end
+  # end
+  #
+  # describe "GET #edit" do
+  #   it "returns a success response" do
+  #     lease = Lease.create! valid_attributes
+  #     get :edit, params: {id: lease.to_param}, session: valid_session
+  #     expect(response).to be_successful
+  #   end
+  # end
 
-  describe "GET #show" do
-    it "returns a success response" do
-      lease = Lease.create! valid_attributes
-      get :show, params: {id: lease.to_param}, session: valid_session
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET #new" do
-    it "returns a success response" do
-      get :new, params: {}, session: valid_session
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET #edit" do
-    it "returns a success response" do
-      lease = Lease.create! valid_attributes
-      get :edit, params: {id: lease.to_param}, session: valid_session
-      expect(response).to be_successful
-    end
-  end
-
-  describe "POST #create" do
-    context "with valid params" do
-      it "creates a new Lease" do
-        expect {
-          post :create, params: {lease: valid_attributes}, session: valid_session
-        }.to change(Lease, :count).by(1)
-      end
-
-      it "redirects to the created lease" do
-        post :create, params: {lease: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(Lease.last)
-      end
-    end
+  # describe "POST #create" do
+  #   context "with valid params" do
+  #     it "creates a new Lease" do
+  #       expect {
+  #         post :create, params: {lease: valid_attributes}, session: valid_session
+  #       }.to change(Lease, :count).by(1)
+  #     end
+  #
+  #     it "redirects to the created lease" do
+  #       post :create, params: {lease: valid_attributes}, session: valid_session
+  #       expect(response).to redirect_to(Lease.last)
+  #     end
+  #   end
 
     # context "with invalid params" do
     #   it "returns a success response (i.e. to display the 'new' template)" do
@@ -93,28 +93,28 @@ RSpec.describe LeasesController, type: :controller do
     #     expect(response).to be_successful
     #   end
     # end
-  end
+  # end
 
-  describe "PUT #update" do
-    context "with valid params" do
-      let(:new_attributes) {
-        # skip("Add a hash of attributes valid for your model")
-        FactoryBot.build(:lease).attributes.symbolize_keys
-      }
-
-      it "updates the requested lease" do
-        lease = Lease.create! valid_attributes
-        put :update, params: {id: lease.to_param, lease: new_attributes}, session: valid_session
-        lease.reload
-        # skip("Add assertions for updated state")
-      end
-
-      it "redirects to the lease" do
-        lease = Lease.create! valid_attributes
-        put :update, params: {id: lease.to_param, lease: valid_attributes}, session: valid_session
-        expect(response).to redirect_to(lease)
-      end
-    end
+  # describe "PUT #update" do
+  #   context "with valid params" do
+  #     let(:new_attributes) {
+  #       # skip("Add a hash of attributes valid for your model")
+  #       FactoryBot.build(:lease).attributes.symbolize_keys
+  #     }
+  #
+  #     it "updates the requested lease" do
+  #       lease = Lease.create! valid_attributes
+  #       put :update, params: {id: lease.to_param, lease: new_attributes}, session: valid_session
+  #       lease.reload
+  #       # skip("Add assertions for updated state")
+  #     end
+  #
+  #     it "redirects to the lease" do
+  #       lease = Lease.create! valid_attributes
+  #       put :update, params: {id: lease.to_param, lease: valid_attributes}, session: valid_session
+  #       expect(response).to redirect_to(lease)
+  #     end
+  #   end
 
     # context "with invalid params" do
     #   it "returns a success response (i.e. to display the 'edit' template)" do
@@ -123,21 +123,21 @@ RSpec.describe LeasesController, type: :controller do
     #     expect(response).to be_successful
     #   end
     # end
-  end
+  # end
 
-  describe "DELETE #destroy" do
-    it "destroys the requested lease" do
-      lease = Lease.create! valid_attributes
-      expect {
-        delete :destroy, params: {id: lease.to_param}, session: valid_session
-      }.to change(Lease, :count).by(-1)
-    end
-
-    it "redirects to the leases list" do
-      lease = Lease.create! valid_attributes
-      delete :destroy, params: {id: lease.to_param}, session: valid_session
-      expect(response).to redirect_to(leases_url)
-    end
-  end
+  # describe "DELETE #destroy" do
+  #   it "destroys the requested lease" do
+  #     lease = Lease.create! valid_attributes
+  #     expect {
+  #       delete :destroy, params: {id: lease.to_param}, session: valid_session
+  #     }.to change(Lease, :count).by(-1)
+  #   end
+  #
+  #   it "redirects to the leases list" do
+  #     lease = Lease.create! valid_attributes
+  #     delete :destroy, params: {id: lease.to_param}, session: valid_session
+  #     expect(response).to redirect_to(leases_url)
+  #   end
+  # end
 
 end
