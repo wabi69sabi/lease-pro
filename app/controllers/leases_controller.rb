@@ -4,8 +4,6 @@ class LeasesController < ApplicationController
   # GET /leases
   # GET /leases.json
   def index
-    # needs a filter to only show leases to be accessed by current_user
-    # something like Lease.where(users.include? current_user)
     @leases = Lease.all
   end
 
@@ -18,10 +16,13 @@ class LeasesController < ApplicationController
   # GET /leases/new
   def new
     @lease = Lease.new
+    find_users
   end
 
   # GET /leases/1/edit
   def edit
+    authorize! :update, @lease
+    find_users
   end
 
   # POST /leases
@@ -46,6 +47,8 @@ class LeasesController < ApplicationController
   # PATCH/PUT /leases/1.json
   def update
     authorize! :update, @lease
+
+    find_users
 
     respond_to do |format|
       if @lease.update(lease_params)
@@ -76,8 +79,13 @@ class LeasesController < ApplicationController
       @lease = Lease.find(params[:id])
     end
 
+    def find_users
+      @managers = User.where(role: 'manager')
+      @tenants = User.where(role: 'tenant')
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def lease_params
-      params.fetch(:lease).permit(:address, :city, :state, :country, :rent, :start_date, :end_date, :due_date)
+      params.fetch(:lease).permit(:address, :city, :state, :country, :rent, :start_date, :end_date, :due_date, :owner, :manager, :tenant, :accepted)
     end
 end

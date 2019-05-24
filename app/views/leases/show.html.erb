@@ -24,6 +24,43 @@
   <li> Due date:
     <%= @lease.due_date %>
   </li>
+
+  <h3>Management:</h3>
+
+  <li> Owner:
+    <% if @lease.owner %>
+      <%= User.find(@lease.owner).first_name + ' ' + User.find(@lease.owner).last_name %>
+    <% end %>
+  </li>
+
+  <li> Manager:
+    <% if @lease.manager %>
+      <%= User.find(@lease.manager).first_name + ' ' + User.find(@lease.manager).last_name %>
+    <% end %>
+  </li>
+
+  <h3>Occupants:</h3>
+
+  <li> Tenant:
+    <% if @lease.tenant %>
+      <%= User.find(@lease.tenant).first_name + ' ' + User.find(@lease.tenant).last_name %>
+      <% if User.find(@lease.tenant) == current_user %>
+        Accept?
+        <%= form_with(model: @lease, local: true) do |f| %>
+          <div class="field">
+            <li>
+              <%= f.label :accept? %>
+              <%= f.check_box :accepted %>
+            </li>
+          </div>
+
+          <div class="actions">
+            <%= f.submit %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </li>
 </ul>
 
 <%= link_to 'Edit', edit_lease_path(@lease) %> |
